@@ -157,8 +157,10 @@ int main(){
 
     std::cout << "Introduzca los dos registros a buscar (Por fecha y hora en orden ascendente, ej. :  \n'Oct 08 02:41:40'\n'Oct 20 12:35:02'" << std::endl;
 
+    std::cout << "Fecha de inicio:" << std::endl;
     std::getline(std::cin, val1);
     /* std::cout << val1 << std::endl; */
+    std::cout << "Fecha de fin:" << std::endl;
     std::getline(std::cin, val2);
     /* std::cout << val2 << std::endl; */
 
