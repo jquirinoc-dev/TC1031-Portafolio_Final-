@@ -80,6 +80,20 @@ int binarySearch(std::vector<LOG> vectorLogs, int n, dateTime k) {
   return -1;
 }
 
+/* Funcion que toma un string y lo parte para generar y devolver un dato de la clase dateTime */
+dateTime generateDate(std::string stringDate){
+
+    std::string month = stringDate.substr(0,3);
+    int day = stoi(stringDate.substr(4,6));
+    int hour = stoi(stringDate.substr(7,9));
+    int min = stoi(stringDate.substr(10,12));
+    int sec = stoi(stringDate.substr(13,15));
+    
+    dateTime date(month, day, hour, min, sec);
+
+    return date;
+}
+
 /* Recibimos nuestro vector y una variable int igual a cero la cual servirá para calcular el tamaño de nuestro vector
 En esta funcion leemos el archivo bitacora.txt y, por cada linea, creamos un struct tipo LOG que guarda los datos
 para manipular y ordenar nuestro vector mas adelante */
@@ -96,17 +110,10 @@ void loadLogs(std::vector<LOG> &vectorLogs, int &logNums){
     std::string line;
 
     while (getline(file, line)){
-        
-        std::string month = line.substr(0,3);
-        int day = stoi(line.substr(4,6));
-        int hour = stoi(line.substr(7,9));
-        int min = stoi(line.substr(10,12));
-        int sec = stoi(line.substr(13,15));
+
+        dateTime date = generateDate(line);
         std::string fullDate = line.substr(0,15);
         std::string ipDesc = line.substr(16, line.size());
-        
-
-        dateTime date(month, day, hour, min, sec);
 
         LOG newLog;
         newLog.date = date;
@@ -151,7 +158,6 @@ void printRange(std::vector<LOG> vectorLogs, int n, int x, int y){
     }
 }
 
-
 /* Funcion principal del programa */
 int main(){
 
@@ -166,12 +172,9 @@ int main(){
     std::cout << "El arreglo ha sido ordenado!!" << std::endl;
 
     writeToNewTxt(vectorLogs, n);
-
-    
-
+   
     std::string val1;
     std::string val2;
-    int res1, res2 = -1;
 
     std::cout << "Introduzca los dos registros a buscar (Por fecha y hora en orden ascendente, ej. :  \n'Oct 08 02:41:40'\n'Oct 20 12:35:02'" << std::endl;
 
@@ -181,23 +184,12 @@ int main(){
     std::cout << "Fecha de fin:" << std::endl;
     std::getline(std::cin, val2);
 
-    std::string month = val1.substr(0,3);
-    int day = stoi(val1.substr(4,6));
-    int hour = stoi(val1.substr(7,9));
-    int min = stoi(val1.substr(10,12));
-    int sec = stoi(val1.substr(13,15));
+    int res1, res2;
 
-    dateTime fecha1(month, day, hour, min, sec);
-
+    dateTime fecha1 = generateDate(val1);
     res1 =  binarySearch(vectorLogs, n, fecha1);
-
-    month = val2.substr(0,3);
-    day = stoi(val2.substr(4,6));
-    hour = stoi(val2.substr(7,9));
-    min = stoi(val2.substr(10,12));
-    sec = stoi(val2.substr(13,15));
-
-    dateTime fecha2(month, day, hour, min, sec);
+    
+    dateTime fecha2 = generateDate(val2);
     res2 =  binarySearch(vectorLogs, n, fecha2);
 
     if (res1 == -1 || res2 == -1){
