@@ -23,7 +23,7 @@ dateTime generateDate(std::string stringDate){
     return date;
 }
 
-void loadLogs(DoubleLinkedList<std::string> &logList, int &logNums){
+void loadLogs(DoubleLinkedList<std::string> &stringLogList, DoubleLinkedList<Log> &logList, int &logNums){
     logNums = 0;
     std::string month = "";
     std::string day = "";
@@ -37,28 +37,59 @@ void loadLogs(DoubleLinkedList<std::string> &logList, int &logNums){
 
     while (getline(file, line)){
 
-        /* dateTime date = generateDate(line);
+        dateTime date = generateDate(line);
         std::string fullDate = line.substr(0,15);
         std::string ipDesc = line.substr(16, line.size());
 
         Log newLog(date, fullDate, ipDesc);
- */
-        logList.addLast(line);
+
+        stringLogList.addLast(line);
+        logList.addLast(newLog);
+
 
         logNums++;
     }
 }
 
+void writeToNewTxt(DoubleLinkedList<Log> logList, int start, int end){
+    
+    std::ofstream out("bitacora_nueva.txt");
+
+    for (int i = start; i <= end; i++){
+        std::string line;
+
+        if (i == end){
+            line = logList.getData(i).getStringDate() + " " + logList.getData(i).getIpDesc();
+            out << line;
+        }else {
+            line = logList.getData(i).getStringDate() + " " + logList.getData(i).getIpDesc() + "\n";
+            out << line;
+        }
+        
+    }
+
+    out.close();
+}
+
+void printLogs(DoubleLinkedList<Log> logList, int n){
+
+    for (int i = 0; i < n; i++){
+        std::cout << logList.getData(i).getStringDate() << " " << logList.getData(i).getIpDesc() << std::endl;
+    }
+}
 
 int main(){
 
     /* DoubleLinkedList<Log> myLogList; */
-    DoubleLinkedList<std::string> myLogList;
+    DoubleLinkedList<Log> myLogList;
     DoubleLinkedList<std::string> myStringLogList;
     int n = 0;
 
-    loadLogs(myLogList, n);
-    myLogList.printList();
+    loadLogs(myStringLogList, myLogList, n);
+    /* myLogList.printList(); */
+
+    /* printLogs(myLogList, n); */
+    writeToNewTxt(myLogList, 0, n);
 
     /* std::cout << n; */
 

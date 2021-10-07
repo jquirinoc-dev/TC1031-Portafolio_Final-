@@ -12,6 +12,9 @@ class Log{
     public:
         Log();
         Log(dateTime, std::string, std::string);
+        dateTime getDate();
+        std::string getStringDate();
+        std::string getIpDesc();
         bool operator !=(const Log&);
         bool operator ==(const Log&);
         bool operator >(const Log&);
@@ -20,7 +23,6 @@ class Log{
         bool operator <=(const Log&);
 
 };
-
 
 Log::Log(){
     dateString = "Date";
@@ -31,6 +33,18 @@ Log::Log(dateTime date_, std::string dateS, std::string ip){
     date = date_;
     dateString = dateS;
     ipDesc = ip;
+}
+
+dateTime Log::getDate(){
+    return date;
+}
+
+std::string Log::getStringDate(){
+    return dateString;
+}
+
+std::string Log::getIpDesc(){
+    return ipDesc;
 }
 
 bool Log::operator==(const Log &other) {
@@ -57,4 +71,4 @@ bool Log::operator<=(const Log &other) {
     return this->date <= other.date;
 }
 
-#endif // _LOG_H_
+#endif

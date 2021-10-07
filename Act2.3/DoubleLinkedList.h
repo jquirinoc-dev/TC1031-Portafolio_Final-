@@ -16,6 +16,7 @@
         ~DoubleLinkedList();
         int getNumElements();
         void printList();
+        void sort();
         void addFirst(T value);
         void addLast(T value);
         bool deleteData(T value);
@@ -48,7 +49,13 @@
     tail = NULL;
     numElements = 0;
   }
- 
+
+  template<class T>
+  void DoubleLinkedList<T>::sort() {
+
+  }
+
+
   template<class T>
   int DoubleLinkedList<T>::getNumElements() {
     return numElements;
@@ -180,7 +187,7 @@
   
   template<class T>
   T DoubleLinkedList<T>::getData(int position) {
-    if (position < 0 || position >= numElements) {
+    /* if (position < 0 || position >= numElements) {
       std::cout << "Indice fuera de rango" << std::endl;
       return -1;
     }
@@ -196,7 +203,18 @@
         p = p->next;
       }
       return -1;
-    }
+    } */
+
+    if (position == 0)
+        return head->data;
+      Node<T> *p = head;
+      int index = 0;
+      while (p != NULL) {
+        if (index == position)
+          return p->data;
+        index++;
+        p = p->next;
+  }
   }
   
 #endif // _DOUBLELINKEDLIST_H_
