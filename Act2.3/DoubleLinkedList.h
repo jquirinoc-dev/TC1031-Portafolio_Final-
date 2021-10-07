@@ -52,7 +52,7 @@
 
   template<class T>
   void DoubleLinkedList<T>::sort() {
-
+    
   }
 
 
