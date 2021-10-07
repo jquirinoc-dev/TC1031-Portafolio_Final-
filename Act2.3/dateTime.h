@@ -15,6 +15,7 @@ class dateTime {
     bool operator !=(const dateTime&);
     bool operator >(const dateTime&);
     bool operator <(const dateTime&);
+    bool operator >=(const dateTime&);
     bool operator <=(const dateTime&);
     
   
@@ -75,6 +76,10 @@ bool dateTime::operator>(const dateTime &other) {
 
 bool dateTime::operator<(const dateTime &other) {
   return this->date < other.date;
+}
+
+bool dateTime::operator>=(const dateTime &other) {
+  return this->date >= other.date;
 }
 
 bool dateTime::operator<=(const dateTime &other) {

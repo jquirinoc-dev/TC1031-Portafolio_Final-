@@ -21,7 +21,7 @@
         bool deleteData(T value);
         bool deleteAt(int position);
         T getData(int position);
-        void clear();
+
         
       
   };
@@ -57,7 +57,7 @@
   void DoubleLinkedList<T>::printList() {
     Node<T> *ptr = head;
     while (ptr != NULL) {
-        std::cout << ptr->data << " ";
+        std::cout << ptr->data << std::endl;
         ptr = ptr->next;
     }
     std::cout << std::endl;
