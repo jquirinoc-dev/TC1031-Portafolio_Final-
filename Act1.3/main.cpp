@@ -15,14 +15,6 @@ Fecha de modificación: Jueves 7 de Octubre 2021
 #include "Log.h"
 
 
-/* Imprimimos el rango de valores en nuestro vectordependiendo de las posiciones (x, y) que hemos obtenido de nuestra binarySearch, 
-donde n es el tamaño del vector */
-void printRange(std::vector<Log> vectorLogs, int n, int x, int y){
-
-    for (int i = x; i <= y; i++){
-        std::cout << vectorLogs[i].getAll() << std::endl;
-    }
-}
 
 /* Funcion principal del programa */
 int main(){
