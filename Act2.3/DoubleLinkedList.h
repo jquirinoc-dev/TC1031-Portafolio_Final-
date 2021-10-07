@@ -24,7 +24,8 @@
         bool deleteAt(int position);
         T getData(int position);
         void updateAt(T value, T nuevo);
-        void loadLogs();
+        void loadLogs(std::string);
+        void writeToNewTxt(std::string);
         
       
   };
@@ -257,11 +258,11 @@
   }
   
   template<class T>
-  void DoubleLinkedList<T>::loadLogs(){
+  void DoubleLinkedList<T>::loadLogs(std::string txtName){
     // Agregar manejo de excepciones
     
     std::string month, day, hour, min, sec, ipa, desc;
-    std::ifstream in("bitacora.txt");
+    std::ifstream in(txtName);
     while(std::getline(in, month, ' ')){
         std::getline(in, day, ' ');
         std::getline(in,hour,':');
@@ -277,4 +278,26 @@
         /* logNums++; */
     }
 }
+
+  template<class T>
+  void DoubleLinkedList<T>::writeToNewTxt(std::string txtName){
+      
+      std::ofstream out(txtName);
+
+      for (int i = 0; i < this->getNumElements(); i++){
+          std::string line;
+
+          if (i == this->getNumElements() - 1){
+              line = this->getData(i).getAll();
+              out << line;
+          }else {
+              line = this->getData(i).getAll() + "\n";
+              out << line;
+          }
+          
+      }
+
+      out.close();
+  }
+
 #endif // _DOUBLELINKEDLIST_H_
