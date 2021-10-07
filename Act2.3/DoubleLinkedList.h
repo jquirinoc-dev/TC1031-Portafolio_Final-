@@ -1,7 +1,8 @@
 #ifndef _DOUBLELINKEDLIST_H_
 #define _DOUBLELINKEDLIST_H_
 
-  #include <climits>
+  #include <iostream>
+  #include <fstream>
   #include "Node.h"
 
   template <class T>
@@ -22,7 +23,8 @@
         bool deleteData(T value);
         bool deleteAt(int position);
         T getData(int position);
-
+        void updateAt(T value, T nuevo);
+        void loadLogs();
         
       
   };
@@ -52,7 +54,41 @@
 
   template<class T>
   void DoubleLinkedList<T>::sort() {
+    int  n = this->getNumElements();
+
+    for (int i = 0; i < n - 1; i++) {
+      int minIndex = i;
+      for (int j = i + 1; j < n; j++) {
+        if (this->getData(j) < this->getData(minIndex)) {
+          minIndex = j;
+        }
+      }
+
+      T temp = this->getData(minIndex);
+      this->updateAt(this->getData(minIndex), this->getData(i));
+      this->updateAt(this->getData(i), temp);
+    }
     
+  }
+
+  template<class T>
+  void DoubleLinkedList<T>::updateAt(T value, T nuevo) {
+    Node<T> *p;
+    p = head;
+
+    if (p != NULL && p->data == value) {
+      p->data = nuevo;
+    } else{
+      while (p != NULL && p->data != value) {
+        p = p->next;
+      }
+
+      if (p == NULL){
+        std::cout << "Index out of range" << std::endl;
+      } else {
+        p->data = nuevo;
+      }
+    }
   }
 
 
@@ -214,7 +250,31 @@
           return p->data;
         index++;
         p = p->next;
-  }
+      }
+
+      return p->data;
+
   }
   
+  template<class T>
+  void DoubleLinkedList<T>::loadLogs(){
+    // Agregar manejo de excepciones
+    
+    std::string month, day, hour, min, sec, ipa, desc;
+    std::ifstream in("bitacora.txt");
+    while(std::getline(in, month, ' ')){
+        std::getline(in, day, ' ');
+        std::getline(in,hour,':');
+        std::getline(in,min,':');
+        std::getline(in,sec,' ');
+        std::getline(in,ipa,' ');
+        std::getline(in,desc);
+        //std::cout << desc << std::endl;
+        dateTime dt(month, stoi(day), stoi(hour), stoi(min), stoi(sec));
+        Log tmpLog(month, day, hour, min, sec, ipa, desc, dt);
+        addLast(tmpLog);
+        std::cout << tmpLog.getAll() << std::endl;
+        /* logNums++; */
+    }
+}
 #endif // _DOUBLELINKEDLIST_H_

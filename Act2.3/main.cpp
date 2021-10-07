@@ -23,11 +23,11 @@ dateTime generateDate(std::string stringDate){
     return date;
 }
 
-void loadLogs(DoubleLinkedList<std::string> &stringLogList, DoubleLinkedList<Log> &logList, int &logNums){
+void loadLogs(DoubleLinkedList<Log> &logList, int &logNums){
     logNums = 0;
-    std::string month = "";
+/*     std::string month = "";
     std::string day = "";
-    std::string time = "";
+    std::string time = ""; */
 
     std::ifstream file;
 
@@ -42,18 +42,15 @@ void loadLogs(DoubleLinkedList<std::string> &stringLogList, DoubleLinkedList<Log
         std::string ipDesc = line.substr(16, line.size());
 
         Log newLog(date, fullDate, ipDesc);
-
-        stringLogList.addLast(line);
         logList.addLast(newLog);
-
 
         logNums++;
     }
 }
 
-void writeToNewTxt(DoubleLinkedList<Log> logList, int start, int end){
+void writeToNewTxt(DoubleLinkedList<Log> logList, int start, int end, std::string fileName){
     
-    std::ofstream out("bitacora_nueva.txt");
+    std::ofstream out(fileName);
 
     for (int i = start; i <= end; i++){
         std::string line;
@@ -82,14 +79,17 @@ int main(){
 
     /* DoubleLinkedList<Log> myLogList; */
     DoubleLinkedList<Log> myLogList;
-    DoubleLinkedList<std::string> myStringLogList;
     int n = 0;
 
-    loadLogs(myStringLogList, myLogList, n);
+    loadLogs(myLogList, n);
     /* myLogList.printList(); */
+    
 
     /* printLogs(myLogList, n); */
-    writeToNewTxt(myLogList, 0, n);
+    myLogList.sort();
+    printLogs(myLogList, n);
+    /* writeToNewTxt(myLogList, 0, n, "bitacora ordenada.txt"); */
+    
 
     /* std::cout << n; */
 

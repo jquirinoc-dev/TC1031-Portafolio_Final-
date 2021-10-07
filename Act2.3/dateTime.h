@@ -29,18 +29,6 @@ class dateTime {
 };
 
 dateTime::dateTime(){
-  std::string mes = "Ene";
-  dateStruct.tm_sec = 0;
-  dateStruct.tm_min = 0;
-  dateStruct.tm_hour = 0;
-  dateStruct.tm_mday = 0;
-  for (int i=0; i < meses.size(); i++) {
-    if (meses[i]==mes)
-      dateStruct.tm_mon = i;
-  }
-  dateStruct.tm_year = 2021 - 1900;  // Asumimos el año 2021
-  // Obtener el Unix timestamp a partir del struct tm anterior 
-  date = mktime(&dateStruct);
 }
 
 dateTime::dateTime(std::string mes, int dia, int horas, int minutos, int segundos) {
@@ -49,6 +37,7 @@ dateTime::dateTime(std::string mes, int dia, int horas, int minutos, int segundo
   dateStruct.tm_min = minutos;
   dateStruct.tm_hour = horas;
   dateStruct.tm_mday = dia;
+  dateStruct.tm_isdst = 0; // desactiva horario de verano
   for (int i=0; i < meses.size(); i++) {
     if (meses[i]==mes)
       dateStruct.tm_mon = i;
