@@ -26,6 +26,9 @@
         void updateAt(T value, T nuevo);
         void loadLogs(std::string);
         void writeToNewTxt(std::string);
+        void mergeSort();
+        void frontBackSlip(Node<T> *source, Node<T>** frontRef, Node<T>** backRef);
+        Node<T> sortedMerge(Node<T>*, Node<T>*);
         
       
   };
@@ -298,6 +301,47 @@
       }
 
       out.close();
+  }
+
+
+  template<class T>
+  void DoubleLinkedList<T>::mergeSort() {
+    Node<T> *p = head;
+    Node<T> *a;
+    Node<T> *b;
+
+    if (p == NULL || p->next == NULL) {
+      return;
+    }
+  }
+
+  template<class T>
+  void DoubleLinkedList<T>::frontBackSlip(Node<T> *source, Node<T>** frontRef, Node<T>** backRef){
+    Node<T> *fast;
+    Node<T> *slow;
+    slow = source;
+
+  }
+
+  template<class T>
+  Node<T> DoubleLinkedList::sortedMerge(Node<T> *a, Node<T> *b) {
+    
+    Node<T> *result = NULL;
+
+    if (a == NULL){
+      return b;
+    } else if (b == NULL){
+      return a;
+    }
+
+    if (a->data.getDate() <= b->date.getDate()){
+      result = a;
+      result->next = sortedMerge(a->next, b);
+    } else {
+      result = b;
+      result->nexet = sortedMerge(a, b->next);
+    }
+    return result;
   }
 
 #endif // _DOUBLELINKEDLIST_H_
