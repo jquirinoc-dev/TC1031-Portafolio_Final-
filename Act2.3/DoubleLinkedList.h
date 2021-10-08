@@ -26,8 +26,8 @@
         void updateAt(T value, T nuevo);
         void loadLogs(std::string);
         void writeToNewTxt(std::string);
-        void mergeSort();
-        void frontBackSlip(Node<T> *source, Node<T>** frontRef, Node<T>** backRef);
+        void mergeSort(Node<T>**);
+        void frontBackSplit(Node<T> *source, Node<T>** frontRef, Node<T>** backRef);
         Node<T> sortedMerge(Node<T>*, Node<T>*);
         
       
@@ -305,26 +305,47 @@
 
 
   template<class T>
-  void DoubleLinkedList<T>::mergeSort() {
-    Node<T> *p = head;
+  void DoubleLinkedList<T>::mergeSort(Node<T> **headRef) {
+    Node<T> *p = headRef;
     Node<T> *a;
     Node<T> *b;
 
     if (p == NULL || p->next == NULL) {
       return;
     }
+
+    frontBackSlip(p, &a, &b);
+
+    mergeSort(&a);
+    mergeSort(&b);
+
+    head = sortedMerge(a, b);
   }
 
   template<class T>
-  void DoubleLinkedList<T>::frontBackSlip(Node<T> *source, Node<T>** frontRef, Node<T>** backRef){
+  void DoubleLinkedList<T>::frontBackSplit(Node<T> *source, Node<T>** frontRef, Node<T>** backRef){
     Node<T> *fast;
     Node<T> *slow;
     slow = source;
+    fast = source->next;
+
+    while (fast != NULL){
+      fast = fast->next;
+
+      if (fast != NULL){
+        slow = slow->next;
+        fast = fast->next;
+
+        *frontRef = source;
+        *backRef = slow->next;
+        slow->next = NULL;
+      }
+    }
 
   }
 
   template<class T>
-  Node<T> DoubleLinkedList::sortedMerge(Node<T> *a, Node<T> *b) {
+  Node<T> DoubleLinkedList<T>::sortedMerge(Node<T> *a, Node<T> *b) {
     
     Node<T> *result = NULL;
 
