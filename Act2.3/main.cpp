@@ -12,7 +12,6 @@ int main(){
 
     myLogList.writeToNewTxt("bitacora_nueva.txt");
 
-    myLogList.mergeSort(&myLogList.getData(0));
 
     /* printLogs(myLogList, n); */
     myLogList.sortUsingStacks();
