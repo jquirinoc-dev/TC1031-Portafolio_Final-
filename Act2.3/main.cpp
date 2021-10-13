@@ -14,7 +14,7 @@ int main(){
 
 
     /* printLogs(myLogList, n); */
-    myLogList.sortUsingStacks();
+    myLogList.iterativeQuickSort();
     //printLogs(myLogList, n);
     myLogList.writeToNewTxt("bitacora_ordenada.txt");
     

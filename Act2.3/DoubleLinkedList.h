@@ -33,6 +33,13 @@
         void frontBackSplit(Node<T> *source, Node<T>** frontRef, Node<T>** backRef);
         Node<T> sortedMerge(Node<T>*, Node<T>*);
         void sortUsingStacks();
+        void swap(Node<T>* a, Node<T>* b);
+        Node<T>* lastNode(Node<T> *root);
+        Node<T>* partition(Node<T> *l, Node<T> *h);
+        void _quickSort(Node<T>* l, Node<T> *h);
+        void recursiveQuickSort();
+        void iterativeQuickSort();
+
         /* void printListRange(int, int); */
         
       
@@ -379,7 +386,7 @@
     return result;
   }
 
-  template<class T>
+  /* template<class T>
   void DoubleLinkedList<T>::sortUsingStacks(){
     
     Stack<T> input;
@@ -398,6 +405,124 @@
       p = p->next;
     }
 
-  }
+  } */
+
+
+template<class T>
+void DoubleLinkedList<T>::swap ( Node<T>* a, Node<T>* b )
+{ T t = a->data; a->data = b->data; b->data = t; }
+ 
+// A utility function to find
+// last node of linked list
+template<class T>
+Node<T>* DoubleLinkedList<T>::lastNode(Node<T> *root)
+{
+    while (root && root->next)
+        root = root->next;
+    return root;
+}
+ 
+/* Considers last element as pivot,
+places the pivot element at its
+correct position in sorted array,
+and places all smaller (smaller than
+pivot) to left of pivot and all greater
+elements to right of pivot */
+template<class T>
+Node<T>* DoubleLinkedList<T>::partition(Node<T> *l, Node<T> *h)
+{
+    // set pivot as h element
+    T x = h->data;
+ 
+    // similar to i = l-1 for array implementation
+    Node<T> *i = l->prev;
+ 
+    // Similar to "for (int j = l; j <= h- 1; j++)"
+    for (Node<T> *j = l; j != h; j = j->next)
+    {
+        if (j->data.getDate() <= x.getDate())
+        {
+            // Similar to i++ for array
+            i = (i == NULL)? l : i->next;
+ 
+            swap(i, j);
+        }
+    }
+    i = (i == NULL)? l : i->next; // Similar to i++
+    swap(i, h);
+    return i;
+}
+ 
+/* A recursive implementation
+of quicksort for linked list */
+template<class T>
+void DoubleLinkedList<T>::_quickSort(Node<T>* l, Node<T> *h)
+{
+    if (h != NULL && l != h && l != h->next)
+    {
+        Node<T> *p = partition(l, h);
+        _quickSort(l, p->prev);
+        _quickSort(p->next, h);
+    }
+}
+ 
+// The main function to sort a linked list.
+// It mainly calls _quickSort()
+template<class T>
+void DoubleLinkedList<T>::recursiveQuickSort()
+{
+    // Find last node
+    Node<T> *h = lastNode(head);
+ 
+    // Call the recursive QuickSort
+    _quickSort(head, h);
+}
+
+template<class T>
+void DoubleLinkedList<T>::iterativeQuickSort(){
+    // Create an auxiliary stack
+
+    Stack<Node<T>> stack;
+
+    Node<T>* l = head;
+    Node<T>* h = tail;
+ 
+    // initialize top of stack
+ 
+    // push initial values of l and h to stack
+    stack.push(l);
+    stack.push(h);
+ 
+    // Keep popping from stack while is not empty
+    while (stack.getTop() >= 0) {
+        // Pop h and l
+        h = stack.pop(top->prev);
+        l = stack.pop(l);
+        
+ 
+        // Set pivot element at its correct position
+        // in sorted array
+        Node<T>* p = partition(l, h);
+ 
+        // If there are elements on left side of pivot,
+        // then push left side to stack
+        if (p->prev->data.getDate() > l->data.getDate()) {
+            /* stack[++top] = l; */
+            stack.push(l);
+            /* stack[++top] = p; */
+            stack.push(p);
+        }
+ 
+        // If there are elements on right side of pivot,
+        // then push right side to stack
+        if (p->next->data.getDate() < h->data.getDate()) {
+            /* stack[++top] = p + 1; */
+            stack.push(p->next);
+            /* stack[++top] = h; */
+            stack.push(h);
+        }
+    }
+}
+
 
 #endif // _DOUBLELINKEDLIST_H_
