@@ -4,6 +4,9 @@
   #include <iostream>
   #include <fstream>
   #include "Node.h"
+  #include "Stack.h"
+  #include "dateTime.h"
+  #include "Log.h"
 
   template <class T>
   class DoubleLinkedList {
@@ -29,6 +32,8 @@
         void mergeSort();
         void frontBackSlip(Node<T> *source, Node<T>** frontRef, Node<T>** backRef);
         Node<T> sortedMerge(Node<T>*, Node<T>*);
+        void sortUsingStacks();
+        /* void printListRange(int, int); */
         
       
   };
@@ -56,7 +61,7 @@
     numElements = 0;
   }
 
-  template<class T>
+/*   template<class T>
   void DoubleLinkedList<T>::sort() {
     int  n = this->getNumElements();
 
@@ -73,7 +78,7 @@
       this->updateAt(this->getData(i), temp);
     }
     
-  }
+  } */
 
   template<class T>
   void DoubleLinkedList<T>::updateAt(T value, T nuevo) {
@@ -282,6 +287,15 @@
     }
 }
 
+  /* template<class T>
+  void DoubleLinkedList<T>::printListRange(int start, int end){
+
+    for (int i = start; i <= end; i++){
+      std::cout << getData(i).getAll() << std::endl;
+    }
+
+  } */
+
   template<class T>
   void DoubleLinkedList<T>::writeToNewTxt(std::string txtName){
       
@@ -324,7 +338,7 @@
   }
 
   template<class T>
-  Node<T> DoubleLinkedList::sortedMerge(Node<T> *a, Node<T> *b) {
+  Node<T> DoubleLinkedList<T>::sortedMerge(Node<T> *a, Node<T> *b) {
     
     Node<T> *result = NULL;
 
@@ -342,6 +356,27 @@
       result->nexet = sortedMerge(a, b->next);
     }
     return result;
+  }
+
+  template<class T>
+  void DoubleLinkedList<T>::sortUsingStacks(){
+    
+    Stack<T> input;
+
+    for (int i = 0; i < numElements; i++){
+      input.push(getData(i));
+    }
+
+    Stack<T> tmpStack = input.sortStack();
+
+    Node<T> *p = head;
+
+    for (int i = 0; i < numElements; i++){
+      p->data = tmpStack.getTop();
+      tmpStack.pop();
+      p = p->next;
+    }
+
   }
 
 #endif // _DOUBLELINKEDLIST_H_

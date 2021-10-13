@@ -8,14 +8,16 @@ int main(){
     int n = 0;
 
     myLogList.loadLogs("bitacora.txt");
+    /* myLogList.printListRange(0, myLogList.getNumElements()); */
+
     myLogList.writeToNewTxt("bitacora_nueva.txt");
 
     
 
     /* printLogs(myLogList, n); */
-    //myLogList.sort();
+    myLogList.sortUsingStacks();
     //printLogs(myLogList, n);
-    /* writeToNewTxt(myLogList, 0, n, "bitacora ordenada.txt"); */
+    myLogList.writeToNewTxt("bitacora_ordenada.txt");
     
 
     /* std::cout << n; */
