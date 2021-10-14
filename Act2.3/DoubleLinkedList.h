@@ -21,13 +21,13 @@
         int getNumElements();
         int numElements;
         void printList();
-        void sort();
+        /* void sort(); */
         void addFirst(T value);
         void addLast(T value);
         bool deleteData(T value);
         bool deleteAt(int position);
         T getData(int position);
-        void updateAt(T value, T nuevo);
+        /* void updateAt(T value, T nuevo); */
         void loadLogs(std::string);
         void printRange(int, int);
         void writeToNewTxt(std::string, int, int);
@@ -65,7 +65,7 @@
   }
 
 
-  template<class T>
+  /*template<class T>
   void DoubleLinkedList<T>::updateAt(T value, T nuevo) {
     Node<T> *p;
     p = head;
@@ -83,13 +83,16 @@
         p->data = nuevo;
       }
     }
-  }
+  } */
 
 
+  //O(1)
   template<class T>
   int DoubleLinkedList<T>::getNumElements() {
     return numElements;
   }
+  
+  //O(n)
   template<class T>
   void DoubleLinkedList<T>::printList() {
     Node<T> *ptr = head;
@@ -100,6 +103,7 @@
     std::cout << std::endl;
   }
 
+  //O(n)
   template<class T>
   void DoubleLinkedList<T>::addFirst(T value) {
     Node<T> *newNode = new Node<T>(value);
@@ -116,6 +120,7 @@
     numElements++;
   }
   
+  //O(1)
   template<class T>
   void DoubleLinkedList<T>::addLast(T value) {
     // La lista esta vacia
@@ -215,6 +220,8 @@
     }
   }
   
+  //Mejor caso O(1)
+  //Peor caso O(n) siendo n el numero de nodos de la LinkedList
   template<class T>
   T DoubleLinkedList<T>::getData(int position) {
 
@@ -233,6 +240,7 @@
 
   }
   
+  //O(n)
   template<class T>
   void DoubleLinkedList<T>::loadLogs(std::string txtName){
     
@@ -253,6 +261,7 @@
 }
 
 
+  //O(n)
   template<class T>
   void DoubleLinkedList<T>::writeToNewTxt(std::string txtName, int start, int end){
       
@@ -274,6 +283,7 @@
       out.close();
   }
 
+  //O(n)
   template<class T>
   void DoubleLinkedList<T>::printRange(int start, int end){
     
@@ -283,13 +293,16 @@
 
   }
 
+//O(1)
 template<class T>
 void DoubleLinkedList<T>::swap ( Node<T>* a, Node<T>* b ){ 
-  T t = a->data; a->data = b->data; b->data = t; 
+  T t = a->data; 
+  a->data = b->data; 
+  b->data = t; 
   }
  
 
- 
+//O(n)
 template<class T>
 Node<T>* DoubleLinkedList<T>::partition(Node<T> *l, Node<T> *h){
     T x = h->data;
@@ -310,7 +323,7 @@ Node<T>* DoubleLinkedList<T>::partition(Node<T> *l, Node<T> *h){
  
 
 
-//O(n log n)
+//O(log n)
 template<class T>
 void DoubleLinkedList<T>::iterativeQuickSort(){
     // Create an auxiliary stack

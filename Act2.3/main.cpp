@@ -1,3 +1,14 @@
+/* Este programa carga los datos de un archivo bitacora.txt como tipo Log cada uno a una Doubly Linked List.
+Mas adelante, se implementa una funcion de quickSort que se apoya en stacks para eliminar la recursividad.
+Esto con el proposito de mostrar ordenar la lista ligada por fechas y tomar un rango de fechas determinado e
+imprimirlo y escribirlo en un archivo nuevo.
+
+Jonathan Joaquin Quirino Carrasco | A01640100
+
+Fecha de creación: Viernes 8 de Octubre 2021
+Fecha de modificación: Jueves 14 de Octubre 2021
+*/
+
 #include "Log.h"
 #include "DoubleLinkedList.h"
 #include "dateTime.h"
@@ -10,8 +21,10 @@ int main(){
 
     myLogList.loadLogs("bitacora.txt");
 
+    std::cout << "---Sorteando la DoubleLinkedList...---" << std::endl;
     myLogList.iterativeQuickSort();
 
+    std::cout << "---Escribiendo resultado en archivo .txt...---" << std::endl;
     myLogList.writeToNewTxt("bitacora_ordenada.txt", 0, myLogList.getNumElements() - 1);
 
     std::string val1, val2;
