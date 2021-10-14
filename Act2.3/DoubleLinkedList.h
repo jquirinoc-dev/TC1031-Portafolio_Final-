@@ -31,15 +31,8 @@
         void loadLogs(std::string);
         void printRange(int, int);
         void writeToNewTxt(std::string, int, int);
-        void mergeSort(Node<T>**);
-        void frontBackSplit(Node<T> *source, Node<T>** frontRef, Node<T>** backRef);
-        Node<T> sortedMerge(Node<T>*, Node<T>*);
-        void sortUsingStacks();
         void swap(Node<T>* a, Node<T>* b);
-        Node<T>* lastNode(Node<T> *root);
         Node<T>* partition(Node<T> *l, Node<T> *h);
-        void _quickSort(Node<T>* l, Node<T> *h);
-        void recursiveQuickSort();
         void iterativeQuickSort();
         int binarySearch(dateTime key);
 
@@ -224,23 +217,6 @@
   
   template<class T>
   T DoubleLinkedList<T>::getData(int position) {
-    /* if (position < 0 || position >= numElements) {
-      std::cout << "Indice fuera de rango" << std::endl;
-      return -1;
-    }
-    else {
-      if (position == 0)
-        return head->data;
-      Node<T> *p = head;
-      int index = 0;
-      while (p != NULL) {
-        if (index == position)
-          return p->data;
-        index++;
-        p = p->next;
-      }
-      return -1;
-    } */
 
     if (position == 0)
         return head->data;
@@ -259,7 +235,6 @@
   
   template<class T>
   void DoubleLinkedList<T>::loadLogs(std::string txtName){
-    // Agregar manejo de excepciones
     
     std::string month, day, hour, min, sec, ipa, desc;
     std::ifstream in(txtName);
@@ -274,19 +249,10 @@
         dateTime dt(month, stoi(day), stoi(hour), stoi(min), stoi(sec));
         Log tmpLog(month, day, hour, min, sec, ipa, desc, dt);
         addLast(tmpLog);
-        /* std::cout << tmpLog.getAll() << std::endl; */
-        /* logNums++; */
+
     }
 }
 
-  /* template<class T>
-  void DoubleLinkedList<T>::printListRange(int start, int end){
-
-    for (int i = start; i <= end; i++){
-      std::cout << getData(i).getAll() << std::endl;
-    }
-
-  } */
 
   template<class T>
   void DoubleLinkedList<T>::writeToNewTxt(std::string txtName, int start, int end){
@@ -318,159 +284,31 @@
 
   }
 
-
-  template<class T>
-  void DoubleLinkedList<T>::mergeSort(Node<T> **headRef) {
-    Node<T> *p = headRef;
-    Node<T> *a;
-    Node<T> *b;
-
-    if (p == NULL || p->next == NULL) {
-      return;
-    }
-
-    frontBackSlip(p, &a, &b);
-
-    mergeSort(&a);
-    mergeSort(&b);
-
-    head = sortedMerge(a, b);
-  }
-
-  template<class T>
-  void DoubleLinkedList<T>::frontBackSplit(Node<T> *source, Node<T>** frontRef, Node<T>** backRef){
-    Node<T> *fast;
-    Node<T> *slow;
-    slow = source;
-    fast = source->next;
-
-    while (fast != NULL){
-      fast = fast->next;
-
-      if (fast != NULL){
-        slow = slow->next;
-        fast = fast->next;
-
-        *frontRef = source;
-        *backRef = slow->next;
-        slow->next = NULL;
-      }
-    }
-
-  }
-
-  template<class T>
-  Node<T> DoubleLinkedList<T>::sortedMerge(Node<T> *a, Node<T> *b) {
-    
-    Node<T> *result = NULL;
-
-    if (a == NULL){
-      return b;
-    } else if (b == NULL){
-      return a;
-    }
-
-    if (a->data.getDate() <= b->date.getDate()){
-      result = a;
-      result->next = sortedMerge(a->next, b);
-    } else {
-      result = b;
-      result->nexet = sortedMerge(a, b->next);
-    }
-    return result;
-  }
-
-  /* template<class T>
-  void DoubleLinkedList<T>::sortUsingStacks(){
-    
-    Stack<T> input;
-
-    for (int i = 0; i < numElements; i++){
-      input.push(getData(i));
-    }
-
-    Stack<T> tmpStack = input.sortStack();
-
-    Node<T> *p = head;
-
-    for (int i = 0; i < numElements; i++){
-      p->data = tmpStack.getTop();
-      tmpStack.pop();
-      p = p->next;
-    }
-
-  } */
-
-
 template<class T>
-void DoubleLinkedList<T>::swap ( Node<T>* a, Node<T>* b )
-{ T t = a->data; a->data = b->data; b->data = t; }
+void DoubleLinkedList<T>::swap ( Node<T>* a, Node<T>* b ){ 
+  T t = a->data; a->data = b->data; b->data = t; 
+  }
  
-// A utility function to find
-// last node of linked list
-template<class T>
-Node<T>* DoubleLinkedList<T>::lastNode(Node<T> *root)
-{
-    while (root && root->next)
-        root = root->next;
-    return root;
-}
+
  
-/* Considers last element as pivot,
-places the pivot element at its
-correct position in sorted array,
-and places all smaller (smaller than
-pivot) to left of pivot and all greater
-elements to right of pivot */
 template<class T>
-Node<T>* DoubleLinkedList<T>::partition(Node<T> *l, Node<T> *h)
-{
-    // set pivot as h element
+Node<T>* DoubleLinkedList<T>::partition(Node<T> *l, Node<T> *h){
     T x = h->data;
  
-    // similar to i = l-1 for array implementation
     Node<T> *i = l->prev;
  
-    // Similar to "for (int j = l; j <= h- 1; j++)"
     for (Node<T> *j = l; j != h; j = j->next)
     {
-        if (j->data.getDate() <= x.getDate())
-        {
-            // Similar to i++ for array
+        if (j->data.getDate() <= x.getDate()){
             i = (i == NULL)? l : i->next;
- 
             swap(i, j);
         }
     }
-    i = (i == NULL)? l : i->next; // Similar to i++
+    i = (i == NULL)? l : i->next;
     swap(i, h);
     return i;
 }
  
-/* A recursive implementation
-of quicksort for linked list */
-template<class T>
-void DoubleLinkedList<T>::_quickSort(Node<T>* l, Node<T> *h)
-{
-    if (h != NULL && l != h && l != h->next)
-    {
-        Node<T> *p = partition(l, h);
-        _quickSort(l, p->prev);
-        _quickSort(p->next, h);
-    }
-}
- 
-// The main function to sort a linked list.
-// It mainly calls _quickSort()
-template<class T>
-void DoubleLinkedList<T>::recursiveQuickSort()
-{
-    // Find last node
-    Node<T> *h = lastNode(head);
- 
-    // Call the recursive QuickSort
-    _quickSort(head, h);
-}
 
 
 //O(n log n)
@@ -483,38 +321,24 @@ void DoubleLinkedList<T>::iterativeQuickSort(){
     Node<T>* l = head;
     Node<T>* h = tail;
  
-    // initialize top of stack
- 
-    // push initial values of l and h to stack
     stack.push(l);
     stack.push(h);
  
-    // Keep popping from stack while is not empty
     while (stack.getNumElements() > 0) {
-        // Pop h and l
         h = stack.pop();
         l = stack.pop();
         
  
-        // Set pivot element at its correct position
-        // in sorted array
+
         Node<T>* p = partition(l, h);
  
-        // If there are elements on left side of pivot,
-        // then push left side to stack
         if (p->data.getDate() > l->data.getDate()) {
-            /* stack[++top] = l; */
             stack.push(l);
-            /* stack[++top] = p; */
             stack.push(p->prev);
         }
- 
-        // If there are elements on right side of pivot,
-        // then push right side to stack
+
         if (p->data.getDate() < h->data.getDate()) {
-            /* stack[++top] = p + 1; */
             stack.push(p->next);
-            /* stack[++top] = h; */
             stack.push(h);
         }
     }

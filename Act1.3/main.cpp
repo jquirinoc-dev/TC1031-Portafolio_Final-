@@ -26,15 +26,12 @@ int main(){
 
     std::cout << "El arreglo esta siendo leido de bitacora.txt y ordenado" << std::endl;
 
-    /* loadLogs(vectorLogs, n); */
-    /* quickSort(vectorLogs, 0, vectorLogs.size() - 1); */
 
     newLog.quickSort(vectorLogs, 0, vectorLogs.size() - 1);
     
     std::cout << "El arreglo ha sido ordenado!!" << std::endl;
     std::cout << vectorLogs.size() << std::endl;
 
-    /* writeToNewTxt(vectorLogs, vectorLogs.size()); */
     newLog.writeToNewTxt(vectorLogs, "bitacora_ordenada.txt");
     std::cout << vectorLogs.size() << std::endl;
    

@@ -6,19 +6,12 @@
 
 int main(){
 
-    /* DoubleLinkedList<Log> myLogList; */
     DoubleLinkedList<Log> myLogList;
-    int n = 0;
 
     myLogList.loadLogs("bitacora.txt");
-    /* myLogList.printListRange(0, myLogList.getNumElements()); */
 
-    /* myLogList.writeToNewTxt("bitacora_nueva.txt", 0, myLogList.getNumElements() - 1); */
-
-
-    /* printLogs(myLogList, n); */
     myLogList.iterativeQuickSort();
-    //printLogs(myLogList, n);
+
     myLogList.writeToNewTxt("bitacora_ordenada.txt", 0, myLogList.getNumElements() - 1);
 
     std::string val1, val2;
@@ -139,11 +132,6 @@ int main(){
         myLogList.printRange(res5, res6);
         myLogList.writeToNewTxt("test03.txt", res5, res6);
     }
-
-
-
-
-    /* std::cout << n; */
 
     return 0;
 }
