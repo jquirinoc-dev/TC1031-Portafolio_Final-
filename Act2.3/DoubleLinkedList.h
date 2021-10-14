@@ -13,12 +13,13 @@
       private:
         Node<T>* head;
         Node<T>* tail;
-        int numElements;
+        
 
       public:
         DoubleLinkedList();
         ~DoubleLinkedList();
         int getNumElements();
+        int numElements;
         void printList();
         void sort();
         void addFirst(T value);
@@ -28,7 +29,8 @@
         T getData(int position);
         void updateAt(T value, T nuevo);
         void loadLogs(std::string);
-        void writeToNewTxt(std::string);
+        void printRange(int, int);
+        void writeToNewTxt(std::string, int, int);
         void mergeSort(Node<T>**);
         void frontBackSplit(Node<T> *source, Node<T>** frontRef, Node<T>** backRef);
         Node<T> sortedMerge(Node<T>*, Node<T>*);
@@ -39,6 +41,7 @@
         void _quickSort(Node<T>* l, Node<T> *h);
         void recursiveQuickSort();
         void iterativeQuickSort();
+        int binarySearch(dateTime key);
 
         /* void printListRange(int, int); */
         
@@ -68,24 +71,6 @@
     numElements = 0;
   }
 
-/*   template<class T>
-  void DoubleLinkedList<T>::sort() {
-    int  n = this->getNumElements();
-
-    for (int i = 0; i < n - 1; i++) {
-      int minIndex = i;
-      for (int j = i + 1; j < n; j++) {
-        if (this->getData(j) < this->getData(minIndex)) {
-          minIndex = j;
-        }
-      }
-
-      T temp = this->getData(minIndex);
-      this->updateAt(this->getData(minIndex), this->getData(i));
-      this->updateAt(this->getData(i), temp);
-    }
-    
-  } */
 
   template<class T>
   void DoubleLinkedList<T>::updateAt(T value, T nuevo) {
@@ -289,7 +274,7 @@
         dateTime dt(month, stoi(day), stoi(hour), stoi(min), stoi(sec));
         Log tmpLog(month, day, hour, min, sec, ipa, desc, dt);
         addLast(tmpLog);
-        std::cout << tmpLog.getAll() << std::endl;
+        /* std::cout << tmpLog.getAll() << std::endl; */
         /* logNums++; */
     }
 }
@@ -304,11 +289,11 @@
   } */
 
   template<class T>
-  void DoubleLinkedList<T>::writeToNewTxt(std::string txtName){
+  void DoubleLinkedList<T>::writeToNewTxt(std::string txtName, int start, int end){
       
       std::ofstream out(txtName);
 
-      for (int i = 0; i < this->getNumElements(); i++){
+      for (int i = start; i <= end; i++){
           std::string line;
 
           if (i == this->getNumElements() - 1){
@@ -322,6 +307,15 @@
       }
 
       out.close();
+  }
+
+  template<class T>
+  void DoubleLinkedList<T>::printRange(int start, int end){
+    
+    for (int i = start; i <= end; i++){
+      std::cout<< this->getData(i).getAll() << std::endl;
+    }
+
   }
 
 
@@ -478,11 +472,13 @@ void DoubleLinkedList<T>::recursiveQuickSort()
     _quickSort(head, h);
 }
 
+
+//O(n log n)
 template<class T>
 void DoubleLinkedList<T>::iterativeQuickSort(){
     // Create an auxiliary stack
 
-    Stack<Node<T>> stack;
+    Stack<Node<T>*> stack;
 
     Node<T>* l = head;
     Node<T>* h = tail;
@@ -494,10 +490,10 @@ void DoubleLinkedList<T>::iterativeQuickSort(){
     stack.push(h);
  
     // Keep popping from stack while is not empty
-    while (stack.getTop() >= 0) {
+    while (stack.getNumElements() > 0) {
         // Pop h and l
-        h = stack.pop(top->prev);
-        l = stack.pop(l);
+        h = stack.pop();
+        l = stack.pop();
         
  
         // Set pivot element at its correct position
@@ -506,16 +502,16 @@ void DoubleLinkedList<T>::iterativeQuickSort(){
  
         // If there are elements on left side of pivot,
         // then push left side to stack
-        if (p->prev->data.getDate() > l->data.getDate()) {
+        if (p->data.getDate() > l->data.getDate()) {
             /* stack[++top] = l; */
             stack.push(l);
             /* stack[++top] = p; */
-            stack.push(p);
+            stack.push(p->prev);
         }
  
         // If there are elements on right side of pivot,
         // then push right side to stack
-        if (p->next->data.getDate() < h->data.getDate()) {
+        if (p->data.getDate() < h->data.getDate()) {
             /* stack[++top] = p + 1; */
             stack.push(p->next);
             /* stack[++top] = h; */
@@ -523,6 +519,28 @@ void DoubleLinkedList<T>::iterativeQuickSort(){
         }
     }
 }
+
+template<class T>
+int DoubleLinkedList<T>::binarySearch(dateTime key) {
+  int low = 0;
+  int high = numElements - 1;
+  
+
+  while (low <= high) {
+    int m = low + (high - low) / 2;
+
+    if (key == this->getData(m).getDate()){
+        return m;
+    }else if (key < this->getData(m).getDate()) {
+        high = m - 1;
+    }else {
+        low = m + 1;
+    }
+      
+  }
+  return -1; 
+}
+
 
 
 #endif // _DOUBLELINKEDLIST_H_
