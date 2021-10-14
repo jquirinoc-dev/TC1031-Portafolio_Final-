@@ -245,7 +245,6 @@
         std::getline(in,sec,' ');
         std::getline(in,ipa,' ');
         std::getline(in,desc);
-        //std::cout << desc << std::endl;
         dateTime dt(month, stoi(day), stoi(hour), stoi(min), stoi(sec));
         Log tmpLog(month, day, hour, min, sec, ipa, desc, dt);
         addLast(tmpLog);
