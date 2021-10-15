@@ -46,10 +46,14 @@ Log::Log(std::string m, std::string d, std::string h, std::string mi, std::strin
   date = dt;
 }
 
+ //O(1)
+ //Regresa un dato tipo dateTime
  dateTime Log::getDate(){
     return date;
 }
 
+//O(1)
+//Regresa un string con todos los datos de un Log (registro) en formato
 std::string Log::getAll(){
     return mes + " " + dia + " " + hora + ":" + minuto + ":" + segundo + " " + ip + " " + descripcion + "\0";
 }

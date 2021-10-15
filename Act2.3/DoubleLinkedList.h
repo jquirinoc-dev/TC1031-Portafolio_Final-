@@ -222,6 +222,7 @@
   
   //Mejor caso O(1)
   //Peor caso O(n) siendo n el numero de nodos de la LinkedList
+  //Regresa los datos almacenados en una posicion de una lista doblemente ligada
   template<class T>
   T DoubleLinkedList<T>::getData(int position) {
 
@@ -241,6 +242,7 @@
   }
   
   //O(n)
+  //Lee un archivo txt y carga un objeto Log a una posicion de una lista ligada.
   template<class T>
   void DoubleLinkedList<T>::loadLogs(std::string txtName){
     
@@ -262,6 +264,7 @@
 
 
   //O(n)
+  //Toma la lista y escribe cada elemento de esta en una linea de un archivo txt
   template<class T>
   void DoubleLinkedList<T>::writeToNewTxt(std::string txtName, int start, int end){
       
@@ -284,6 +287,7 @@
   }
 
   //O(n)
+  //Imprime la lista dentro de un rango especificado por dos parametros enteros que se le pasan
   template<class T>
   void DoubleLinkedList<T>::printRange(int start, int end){
     
@@ -294,6 +298,7 @@
   }
 
 //O(1)
+//Hace un intercambio entre dos valores
 template<class T>
 void DoubleLinkedList<T>::swap ( Node<T>* a, Node<T>* b ){ 
   T t = a->data; 
@@ -303,6 +308,7 @@ void DoubleLinkedList<T>::swap ( Node<T>* a, Node<T>* b ){
  
 
 //O(n)
+//Parte la lista
 template<class T>
 Node<T>* DoubleLinkedList<T>::partition(Node<T> *l, Node<T> *h){
     T x = h->data;
@@ -324,9 +330,9 @@ Node<T>* DoubleLinkedList<T>::partition(Node<T> *l, Node<T> *h){
 
 
 //O(n log n)
+//Ordena la lista haciendo uso de un Stack
 template<class T>
 void DoubleLinkedList<T>::iterativeQuickSort(){
-    // Create an auxiliary stack
 
     Stack<Node<T>*> stack;
 
@@ -356,7 +362,9 @@ void DoubleLinkedList<T>::iterativeQuickSort(){
     }
 }
 
-//O(log n)
+/*O(log n)
+Regresa una posicion donde se encuentra una key o valor a buscar, 
+en caso de no encontrarse, se regresa -1*/
 template<class T>
 int DoubleLinkedList<T>::binarySearch(dateTime key) {
   int low = 0;
