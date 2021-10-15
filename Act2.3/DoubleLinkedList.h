@@ -323,7 +323,7 @@ Node<T>* DoubleLinkedList<T>::partition(Node<T> *l, Node<T> *h){
  
 
 
-//O(log n)
+//O(n log n)
 template<class T>
 void DoubleLinkedList<T>::iterativeQuickSort(){
     // Create an auxiliary stack
@@ -356,6 +356,7 @@ void DoubleLinkedList<T>::iterativeQuickSort(){
     }
 }
 
+//O(log n)
 template<class T>
 int DoubleLinkedList<T>::binarySearch(dateTime key) {
   int low = 0;
