@@ -21,13 +21,11 @@
         int getNumElements();
         int numElements;
         void printList();
-        /* void sort(); */
         void addFirst(T value);
         void addLast(T value);
         bool deleteData(T value);
         bool deleteAt(int position);
         T getData(int position);
-        /* void updateAt(T value, T nuevo); */
         void loadLogs(std::string);
         void printRange(int, int);
         void writeToNewTxt(std::string, int, int);
@@ -35,10 +33,7 @@
         Node<T>* partition(Node<T> *l, Node<T> *h);
         void iterativeQuickSort();
         int binarySearch(dateTime key);
-
-        /* void printListRange(int, int); */
         
-      
   };
 
   template<class T>
@@ -63,28 +58,6 @@
     tail = NULL;
     numElements = 0;
   }
-
-
-  /*template<class T>
-  void DoubleLinkedList<T>::updateAt(T value, T nuevo) {
-    Node<T> *p;
-    p = head;
-
-    if (p != NULL && p->data == value) {
-      p->data = nuevo;
-    } else{
-      while (p != NULL && p->data != value) {
-        p = p->next;
-      }
-
-      if (p == NULL){
-        std::cout << "Index out of range" << std::endl;
-      } else {
-        p->data = nuevo;
-      }
-    }
-  } */
-
 
   //O(1)
   template<class T>
