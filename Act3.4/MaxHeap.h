@@ -185,7 +185,6 @@
     if (largest != i){
       
       std::swap(data[i], data[largest]);
-
       heapify(n, largest);
     }
   }
@@ -205,9 +204,6 @@
 
       heapify(i, 0);
     }
-    
-
-
   }
 
 
