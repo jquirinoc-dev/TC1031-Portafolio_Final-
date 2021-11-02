@@ -38,7 +38,7 @@ ipAddress::ipAddress(std::string fullIp){
     fourth = stoi(fullIp.substr(10,13));
     port = stoi(fullIp.substr(14,17));
 
-    std::cout << first << "." << second << "." << third << "." << fourth << ":" << port << std::endl;
+    /* std::cout << first << "." << second << "." << third << "." << fourth << ":" << port << std::endl; */
 
     decimalIp = (pow(256, 3) * first) + (pow(256, 2) * second) + (pow(256, 1) * third) + (pow(256, 0) * fourth);
 }

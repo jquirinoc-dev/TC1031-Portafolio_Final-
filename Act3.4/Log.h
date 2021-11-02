@@ -56,6 +56,12 @@ Log::Log(std::string m, std::string d, std::string h, std::string mi, std::strin
     return date;
 }
 
+  //O(1)
+  //Regresa la Ip como un decimal para compararla
+  ipAddress Log::getIp(){
+    return actualIp;
+  }
+
 //O(1)
 //Regresa un string con todos los datos de un Log (registro) en formato
 std::string Log::getAll(){
