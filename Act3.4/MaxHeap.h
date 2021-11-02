@@ -32,6 +32,8 @@
       void push(T key);
       void loadLogs(std::string txtName);
       void writeToNewTxt(std::string txtName, int start, int end);
+      void heapify(int n, int i);
+      void heapSort();
       T top();
 
 
@@ -162,6 +164,50 @@
       }
 
       out.close();
+  }
+
+  template <class T>
+  void MaxHeap<T>::heapify(int n, int i){
+    
+    int largest = i;
+
+    int l = 2 * i + 1;
+    int r = 2 * i + 2;
+
+    if (l < n && data[l].getIp() > data[largest].getIp()){
+      largest = l;
+    }
+
+    if (r < n && data[r].getIp() > data[largest].getIp()){
+      largest = r;
+    }
+
+    if (largest != i){
+      
+      std::swap(data[i], data[largest]);
+
+      heapify(n, largest);
+    }
+  }
+
+
+  template <class T>
+  void MaxHeap<T>::heapSort(){
+
+    int n = size;
+
+    for (int i = n / 2 - 1; i >= 0; i--){
+      heapify(n, i);
+    }
+
+    for (int i = n - 1; i > 0; i--){
+      std::swap(data[0], data[i]);
+
+      heapify(i, 0);
+    }
+    
+
+
   }
 
 

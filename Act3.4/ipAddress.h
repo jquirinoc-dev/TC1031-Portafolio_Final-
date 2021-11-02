@@ -7,7 +7,7 @@
 
 class ipAddress {
     public:
-        
+
         ipAddress();
         ipAddress(std::string);
         int getIpDecimal();
@@ -27,8 +27,7 @@ class ipAddress {
         int decimalIp;
 };
 
-ipAddress::ipAddress(){
-}
+ipAddress::ipAddress(){}
 
 ipAddress::ipAddress(std::string fullIp){
 
@@ -70,9 +69,6 @@ bool ipAddress::operator>=(const ipAddress &other) {
 bool ipAddress::operator<=(const ipAddress &other) {
   return this->decimalIp <= other.decimalIp;
 }
-
-
-
 
 
 #endif

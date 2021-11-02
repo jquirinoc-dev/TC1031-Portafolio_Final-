@@ -1,7 +1,8 @@
 #include <iostream>
-#include "ipAddress.h"
-#include "Log.h"
 #include "MaxHeap.h"
+#include "Log.h"
+#include "ipAddress.h"
+
 
 int main(){
     
@@ -20,4 +21,8 @@ int main(){
     /* myMaxHeap.printMaxHeap(); */
 
     myMaxHeap.writeToNewTxt("test.txt", 0, myMaxHeap.getSize() - 1);
+
+    myMaxHeap.heapSort();
+
+    myMaxHeap.writeToNewTxt("SortTest.txt", 0, myMaxHeap.getSize() - 1);
 }
