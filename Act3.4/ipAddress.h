@@ -1,5 +1,5 @@
-#ifndef _IDADDRESS_H_
-#define _IDADDRESS_H_
+#ifndef _IPADDRESS_H_
+#define _IPADDRESS_H_
 
 #include <iostream>
 #include <string>

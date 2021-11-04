@@ -34,6 +34,8 @@
       void writeToNewTxt(std::string txtName, int start, int end);
       void heapify(int n, int i);
       void heapSort();
+      void moveDown(int i);
+      void pop();
       T top();
 
 
@@ -203,6 +205,46 @@
       heapify(i, 0);
     }
   }
+
+  template <class T>
+  void MaxHeap<T>::moveDown(int i) {
+
+    int maxIndex = i;
+
+    if (left(i) <= size && data[left(i)] > data[maxIndex]) {
+      maxIndex = left(i);
+    }
+
+    if (right(i) <= size && data[right(i)] > data[maxIndex]) {
+      maxIndex = right(i);
+    }
+
+    if (i != maxIndex) {
+
+      std::swap(data[i], data[maxIndex]);
+      moveDown(maxIndex);
+
+    }
+  }
+  
+  template <class T>
+  void MaxHeap<T>::pop(){
+    
+    if (size < 1) {
+
+      std::cout << "No hay ningún dato en el heap" << std::endl;
+      return;
+
+    }
+
+    data[0] = data.back();
+    data.pop_back();
+
+    moveDown(0);
+    return;
+    
+  }
+ 
 
 
 #endif // __MAXHEAP_H_

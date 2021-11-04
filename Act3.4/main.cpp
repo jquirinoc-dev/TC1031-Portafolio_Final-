@@ -14,6 +14,7 @@ Fecha de modificación: Sabado 6 de Noviembre 2021
 #include "MaxHeap.h"
 #include "Log.h"
 #include "ipAddress.h"
+#include "ipOcurrence.h"
 
 //Funcion principal de nuestro programa.
 int main(){
@@ -23,4 +24,6 @@ int main(){
     myMaxHeap.loadLogs("BitacoraHeap.txt");
     myMaxHeap.heapSort();
     myMaxHeap.writeToNewTxt("bitacora_ordenada.txt", 0, myMaxHeap.getSize() - 1);
+
+    myMaxHeap<ipOcurrence> myNewMaxHeap(800);
 }
