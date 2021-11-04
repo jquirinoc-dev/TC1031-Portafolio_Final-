@@ -11,6 +11,7 @@ class ipAddress {
         ipAddress();
         ipAddress(std::string);
         int getIpDecimal();
+        std::string getIpString();
         bool operator ==(const ipAddress&);
         bool operator !=(const ipAddress&);
         bool operator >(const ipAddress&);
@@ -44,6 +45,10 @@ ipAddress::ipAddress(std::string fullIp){
 
 int ipAddress::getIpDecimal(){
     return decimalIp;
+}
+
+std::string ipAddress::getIpString(){
+  return std::to_string(first) + "." + std::to_string(second) + "." + std::to_string(third) + "." + std::to_string(fourth);
 }
 
 bool ipAddress::operator==(const ipAddress &other) {
