@@ -1,4 +1,5 @@
-/* La funcion de este programa es leer un archivo de texto en el que tenemos registros con fechas y con el algoritmo de ordenamiento QuickSort, ordenamos un arreglo
+/* La funcion de este programa es leer un archivo de texto en el que tenemos registros con fechas y con el algoritmo de 
+ordenamiento QuickSort, ordenamos un arreglo
 y desplegamos en pantalla un rango de registros en base a dos fechas delimitantes introducidas por el usuario. 
 
 Jonathan Joaquín Quirino Carrasco | A01640100

@@ -91,10 +91,10 @@
 
   template <class T> 
   void MaxHeap<T>::push(T key) {
-    /* if (size == maxSize) {
-        std::cout << "Overflow: no se puede insertar la llave: " << key << std::endl;
+    if (size == maxSize) {
+        std::cout << "Overflow: no se puede insertar la llave: " << std::endl;
         return;
-    } */
+    }
     // Insertamos la nueva llave al final del vector
     int i = size;
     data[i] = key;
@@ -169,23 +169,22 @@
   template <class T>
   void MaxHeap<T>::heapify(int n, int i){
     
-    int largest = i;
+    int biggest = i;
 
     int l = 2 * i + 1;
     int r = 2 * i + 2;
 
-    if (l < n && data[l].getIp() > data[largest].getIp()){
-      largest = l;
+    if (l < n && data[l].getIp() > data[biggest].getIp()){
+      biggest = l;
     }
 
-    if (r < n && data[r].getIp() > data[largest].getIp()){
-      largest = r;
+    if (r < n && data[r].getIp() > data[biggest].getIp()){
+      biggest = r;
     }
 
-    if (largest != i){
-      
-      std::swap(data[i], data[largest]);
-      heapify(n, largest);
+    if (biggest != i){
+      std::swap(data[i], data[biggest]);
+      heapify(n, biggest);
     }
   }
 
@@ -195,13 +194,12 @@
 
     int n = size;
 
-    for (int i = n / 2 - 1; i >= 0; i--){
+    for (int i = (n / 2) - 1; i >= 0; i--){
       heapify(n, i);
     }
 
     for (int i = n - 1; i > 0; i--){
       std::swap(data[0], data[i]);
-
       heapify(i, 0);
     }
   }
