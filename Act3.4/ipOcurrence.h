@@ -4,20 +4,33 @@
 #include <iostream>
 #include <string>
 
-Class ipOcurrence {
+class ipOcurrence {
     public:
+        ipOcurrence();
         ipOcurrence(std::string, int);
-        std::string getLine();
+        std::string getAll();
+        int getIp();
     private:
         std::string ip;
         int ocurrences;
 };
 
-ipOcurrences::ipOcurrences(std::string ipa, int oc){
+ipOcurrence::ipOcurrence(){
+    ip = "";
+    ocurrences = 0;
+}
+
+ipOcurrence::ipOcurrence(std::string ipa, int oc){
     ip = ipa;
     ocurrences = oc;
 }
 
-std::string ipOcurrences::getLine(){
-    return ipa + " " + std::to_string(ocurrences);
+std::string ipOcurrence::getAll(){
+    return ip + " " + ":" + std::to_string(ocurrences);
 }
+
+int ipOcurrence::getIp(){
+    return ocurrences;
+}
+
+#endif

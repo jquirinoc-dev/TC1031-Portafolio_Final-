@@ -6,6 +6,7 @@
   #include <fstream>
   #include "dateTime.h"
   #include "ipAddress.h"
+  #include "ipOcurrence.h"
   #include "Log.h"
 
   template<class T>
@@ -31,7 +32,9 @@
       void printMaxHeap();
       void push(T key);
       void loadLogs(std::string txtName);
+      void newLoadLogs(std::string txtName);
       void writeToNewTxt(std::string txtName, int start, int end);
+      void writeFive(std::string txtName);
       void heapify(int n, int i);
       void heapSort();
       void moveDown(int i);
@@ -110,7 +113,7 @@
 
   template <class T> 
   T MaxHeap<T>::top() {
-    T result = -1;
+    T result;
     if (isEmpty()) {
         std::cout << "El MaxHeap está vacio" << std::endl;
         return result;
@@ -145,6 +148,45 @@
   in.close();
 }
 
+  template <class T>
+  void MaxHeap<T>::newLoadLogs(std::string txtName){
+    
+    std::string month, day, hour, min, sec, ipa, desc;
+    std::ifstream in(txtName);
+
+    int counter = 0;
+    std::string temp = "";
+
+    while(std::getline(in, month, ' ')){
+        std::getline(in, day, ' ');
+        std::getline(in,hour,':');
+        std::getline(in,min,':');
+        std::getline(in,sec,' ');
+        std::getline(in,ipa,' ');
+        std::getline(in,desc);
+
+        std::string realIp = ipa.substr(0, 13);
+
+        if (realIp == temp){
+          counter++;
+        } else {
+            if (counter != 0){
+              ipOcurrence ia(realIp, counter);
+              push(ia);
+            }
+
+            counter = 1;
+              
+        }
+        
+        temp = realIp;
+      
+        /* std::cout << tmpLog.getAll() << std::endl; */
+
+    }
+  in.close();
+}
+
   //O(n)
   //Toma el MaxHeap y escribe cada elemento de este en una linea de un archivo txt
   template<class T>
@@ -164,6 +206,27 @@
           }
           
       }
+
+      out.close();
+  }
+
+  template<class T>
+  void MaxHeap<T>::writeFive(std::string txtName){
+      
+      std::ofstream out(txtName);
+
+      std::cout << "\nMost frequented IPs:\n\n";
+
+      out << top().getAll() + "\n";
+      std::cout << top().getAll() << std::endl;
+
+      for (int i = 0; i < 4; i++){
+        pop();
+        out << top().getAll() + "\n";
+        std::cout << top().getAll() << std::endl;
+    }
+
+      std::cout << "\n";
 
       out.close();
   }
@@ -211,11 +274,11 @@
 
     int maxIndex = i;
 
-    if (left(i) <= size && data[left(i)] > data[maxIndex]) {
+    if (left(i) <= size && data[left(i)].getIp() > data[maxIndex].getIp()) {
       maxIndex = left(i);
     }
 
-    if (right(i) <= size && data[right(i)] > data[maxIndex]) {
+    if (right(i) <= size && data[right(i)].getIp() > data[maxIndex].getIp()) {
       maxIndex = right(i);
     }
 
