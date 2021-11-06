@@ -19,21 +19,16 @@ Fecha de modificación: Sabado 6 de Noviembre 2021
 //Funcion principal de nuestro programa.
 int main(){
     
+    //Creamos un MaxHeap para ordenarlo por su valor de IP
     MaxHeap<Log> myMaxHeap(16807);
 
     myMaxHeap.loadLogs("BitacoraHeap.txt");
     myMaxHeap.heapSort();
     myMaxHeap.writeToNewTxt("bitacora_ordenada.txt", 0, myMaxHeap.getSize() - 1);
 
+    //Creamos un nuevo MaxHeap en el que encontraremos las IPs sin repetirse para encontrar las 5 mas accedidas
     MaxHeap<ipOcurrence> myNewMaxHeap(800);
-
-    myNewMaxHeap.newLoadLogs("bitacora_ordenada.txt");
-
-    /* myNewMaxHeap.printMaxHeap(); */
-
-    /* myNewMaxHeap.pop();
     
-    std::cout << myNewMaxHeap.top().getAll() << std::endl; */
-
-   myNewMaxHeap.writeFive("ips_con_mayor_acceso.txt");
+    myNewMaxHeap.newLoadLogs("bitacora_ordenada.txt");
+    myNewMaxHeap.writeFive("ips_con_mayor_acceso.txt");
 }

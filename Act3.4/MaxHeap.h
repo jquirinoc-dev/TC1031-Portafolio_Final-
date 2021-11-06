@@ -140,7 +140,6 @@
 
         Log tmpLog(month, day, hour, min, sec, ipa, desc, dt, ia);
 
-        /* std::cout << tmpLog.getAll() << std::endl; */
 
         push(tmpLog);
 
@@ -180,8 +179,6 @@
         }
         
         temp = realIp;
-      
-        /* std::cout << tmpLog.getAll() << std::endl; */
 
     }
   in.close();
