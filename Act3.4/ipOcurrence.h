@@ -26,7 +26,7 @@ ipOcurrence::ipOcurrence(std::string ipa, int oc){
 }
 
 std::string ipOcurrence::getAll(){
-    return ip + " " + ":" + std::to_string(ocurrences);
+    return ip + " : " + std::to_string(ocurrences);
 }
 
 int ipOcurrence::getIp(){

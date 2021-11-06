@@ -28,12 +28,5 @@ int main(){
     MaxHeap<ipOcurrence> myNewMaxHeap(800);
 
     myNewMaxHeap.newLoadLogs("bitacora_ordenada.txt");
-
-    /* myNewMaxHeap.printMaxHeap(); */
-
-    /* myNewMaxHeap.pop();
-    
-    std::cout << myNewMaxHeap.top().getAll() << std::endl; */
-
-   myNewMaxHeap.writeFive("ips_con_mayor_acceso.txt");
+    myNewMaxHeap.writeFive("ips_con_mayor_acceso.txt");
 }

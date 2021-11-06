@@ -140,8 +140,6 @@
 
         Log tmpLog(month, day, hour, min, sec, ipa, desc, dt, ia);
 
-        /* std::cout << tmpLog.getAll() << std::endl; */
-
         push(tmpLog);
 
     }
@@ -231,6 +229,7 @@
       out.close();
   }
 
+  //O(log n)
   template <class T>
   void MaxHeap<T>::heapify(int n, int i){
     
@@ -253,7 +252,7 @@
     }
   }
 
-
+  //O(n log n)
   template <class T>
   void MaxHeap<T>::heapSort(){
 
