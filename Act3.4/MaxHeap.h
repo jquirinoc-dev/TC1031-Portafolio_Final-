@@ -170,7 +170,7 @@
           counter++;
         } else {
             if (counter != 0){
-              ipOcurrence ia(realIp, counter);
+              ipOcurrence ia(temp, counter);
               push(ia);
             }
 
@@ -300,11 +300,12 @@
     data[0] = data.back();
     data.pop_back();
 
-    moveDown(0);
+    heapify(size, 0);
+    size--;
+
     return;
     
   }
  
-
 
 #endif // __MAXHEAP_H_
